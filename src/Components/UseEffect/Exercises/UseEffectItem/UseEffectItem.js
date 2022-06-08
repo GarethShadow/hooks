@@ -1,6 +1,8 @@
-import UseEffectImage from "../../../images/98_useEffect.png";
 import React, {Component, useState} from "react";
+import UseEffectImage from "../../../../images/98_useEffect.png";
+import UseEffectExercises from "../../../../images/99_useEffect_нпражнения.png";
 import HookCounter from "../HookCounter/HookCounter";
+import Notification from "../Notification/Notification";
 
 const UseEffectItem = () => {
     const [value, setValue] = useState(0);
@@ -16,7 +18,7 @@ const UseEffectItem = () => {
                         <div style={{display: "flex", justifyContent: "space-between"}}>
                             <div>
                                 <HookCounter value={value}/>
-                                <ClassCounter value={value}/>
+                                {/*<ClassCounter value={value}/>*/}
                             </div>
                             <button style={{height: "max-content", marginLeft: "10px"}}
                                     onClick={() => setVisible(false)}>hide
@@ -38,8 +40,10 @@ const UseEffectItem = () => {
                         </div>
                     </div>
                 ) : (<button style={{height: "max-content"}} onClick={() => setVisible(true)}>how</button>)}
-
-
+            </div>
+            <div style={{display: "flex", justifyContent: "space-between", marginTop: "20px"}}>
+                <img style={{height: "190px", marginRight: "10px"}} src={UseEffectExercises} alt=""/>
+                <Notification/>
             </div>
         </div>
     );

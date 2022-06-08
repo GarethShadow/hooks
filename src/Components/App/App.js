@@ -1,8 +1,8 @@
 import React from "react";
-import UseStateItem from "../UseEState/UseStateItem/UseStateItem";
+import UseStateItem from "../UseState/UseStateItem/UseStateItem";
 import UseContextItem from "../UseContext/UseContextItem/UseContextItem";
-import UseEffectItem from "../UseEffect/UseEffectItem/UseEffectItem";
-
+import UseEffectItem from "../UseEffect/Exercises/UseEffectItem/UseEffectItem";
+import DataLoadingItem from "../UseEffect/DataLoading/DataLoadingItem/DataLoadinItem";
 
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
                 <UseContextItem MyContext={MyContext} />
             </MyContext.Provider>
             <UseEffectItem />
+            <DataLoadingItem />
         </div>
     );
 }
