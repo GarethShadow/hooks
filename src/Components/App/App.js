@@ -33,7 +33,7 @@ const HookUseStateSwitcher = () => {
 
     return (
         <div style={{paddingBottom: "10px", backgroundColor: color}}>
-            <p style={{margin: "0px", marginBottom: "10px", fontSize: `${fontSize}px`, color: colorText}}>Test text</p>
+            <p style={{margin: "0px", marginBottom: "10px", fontSize: `${fontSize}px`, color: colorText}}>Testing useState</p>
             <button onClick={() => {
                 setColor("black");
                 setColorText("white");
