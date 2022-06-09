@@ -2,6 +2,8 @@ import React, {useState, useContext, useEffect} from "react";
 import UseStateImg from "../../images/96_useState.png";
 import USseContextImg from "../../images/97_useContext.png";
 import UseEffectImg from "../../images/98_useEffect.png";
+import UseEffectExImg from "../../images/99_useEffect_нпражнения.png";
+import UseEffectDataLeadingImg from "../../images/100_использование_useEffect_для_загрузки_данных.png";
 
 
 const App = () => {
@@ -13,6 +15,7 @@ const App = () => {
                 <HookUseContext MyContext={MyContext} />
             </MyContext.Provider>
             <HookUseEffect />
+            <HookUseEffectDataLoading />
         </div>
     );
 }
@@ -140,8 +143,10 @@ const HookUseEffect = () => {
                         </div>
                     </div>
                 ) : (<button style={{height: "max-content"}} onClick={() => setVisible(true)}>how</button>)}
-
-
+            </div>
+            <div style={{display: "flex", justifyContent: "space-between", marginTop: "20px"}}>
+                <img style={{height: "190px", marginRight: "10px"}} src={UseEffectExImg} alt=""/>
+                <Notification/>
             </div>
         </div>
     );
@@ -156,6 +161,61 @@ const HookCounter = (props) => {
     }, [value])
 
     return  <div>Hook value: {value}</div>
+}
+
+const HookUseEffectDataLoading = () => {
+    const [id, setId] = useState(1);
+    const [name, setName] = useState(null);
+
+    useEffect(() => {
+        let cancelled = false;
+        fetch(`https://swapi.dev/api/planets/${id}/`)
+            .then(res => res.json())
+            .then(data => !cancelled && setName(data.name));
+        return () =>  cancelled = true;
+    }, [id]);
+
+    return (
+        <div>
+            <h2 style={{textAlign: "center"}}>Data loading useEffect</h2>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+                <img style={{height: "190px", marginRight: "10px"}} src={UseEffectDataLeadingImg} alt=""/>
+                <div>
+                    {id > 0 ? (<p style={{width: "200px"}}>{id} - {name}</p>) : (<p style={{width: "200px"}}>{id} - dont planet</p>)}
+
+                    <button onClick={() => {
+                        setId(v => v + 1)
+                    }}>+
+                    </button>
+                    <button onClick={() => {
+                        setId(v => v - 1)
+                    }}>-
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const Notification = () => {
+    const [hide, setHide] = useState(true);
+    const [visible , setVisible] = useState(false);
+
+    useEffect(() => {
+        const hideTimeout = setTimeout(() => setHide(false), 3000);
+        const visibleTimeout = setTimeout(() => setVisible(true), 5000);
+        return () => {
+            clearTimeout(hideTimeout);
+            clearTimeout(visibleTimeout);
+        };
+    }, []);
+
+    return (
+        <div>
+            {hide && <p>Hello hide useEffect</p>}
+            {visible && <p>Hello visible useEffect</p>}
+        </div>
+    );
 }
 
 
