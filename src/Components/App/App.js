@@ -1,6 +1,7 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import UseStateImg from "../../images/96_useState.png";
 import USseContextImg from "../../images/97_useContext.png";
+import UseEffectImg from "../../images/98_useEffect.png";
 
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
             <MyContext.Provider value="Hello context hook">
                 <HookUseContext MyContext={MyContext} />
             </MyContext.Provider>
+            <HookUseEffect />
         </div>
     );
 }
@@ -102,6 +104,59 @@ const HookUseContext = ({MyContext}) => {
         </div>
     );
 };
+
+const HookUseEffect = () => {
+    const [value, setValue] = useState(0);
+    const [visible, setVisible] = useState(true);
+
+    return (
+        <div>
+            <h2 style={{textAlign: "center"}}>useEffect</h2>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+                <img style={{height: "190px", marginRight: "10px"}} src={UseEffectImg} alt=""/>
+                {visible ? (
+                    <div>
+                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                            <div>
+                                <HookCounter value={value}/>
+                            </div>
+                            <button style={{height: "max-content", marginLeft: "10px"}}
+                                    onClick={() => setVisible(false)}>hide
+                            </button>
+                        </div>
+                        <div>
+                            <button onClick={() => {
+                                setValue(v => v + 1)
+                            }}>+
+                            </button>
+                            <button onClick={() => {
+                                setValue(v => v - 1)
+                            }}>-
+                            </button>
+                            <button onClick={() => {
+                                setValue(0)
+                            }}>clear
+                            </button>
+                        </div>
+                    </div>
+                ) : (<button style={{height: "max-content"}} onClick={() => setVisible(true)}>how</button>)}
+
+
+            </div>
+        </div>
+    );
+}
+
+const HookCounter = (props) => {
+    const {value} = props;
+
+    useEffect(() => {
+        console.log(" useEffect() ");
+        return () => console.log("clear");
+    }, [value])
+
+    return  <div>Hook value: {value}</div>
+}
 
 
 export default App;
