@@ -4,6 +4,7 @@ import USseContextImg from "../../images/97_useContext.png";
 import UseEffectImg from "../../images/98_useEffect.png";
 import UseEffectExImg from "../../images/99_useEffect_нпражнения.png";
 import UseEffectDataLeadingImg from "../../images/100_использование_useEffect_для_загрузки_данных.png";
+import HookCreatingImg from "../../images/101_создание_собственных_хуков.png";
 
 
 const App = () => {
@@ -12,10 +13,10 @@ const App = () => {
         <div style={{width: "550px", margin: "0 auto"}}>
             <HookUseState/>
             <MyContext.Provider value="Hello context hook">
-                <HookUseContext MyContext={MyContext} />
+                <HookUseContext MyContext={MyContext}/>
             </MyContext.Provider>
-            <HookUseEffect />
-            <HookUseEffectDataLoading />
+            <HookUseEffect/>
+            <PlanetInfo/>
         </div>
     );
 }
@@ -28,7 +29,7 @@ const HookUseState = () => {
                 <img style={{height: "190px", marginRight: "10px"}} src={UseStateImg} alt=""/>
                 <div>
                     <HookUseStateSwitcher/>
-                    <HookUseStateObject />
+                    <HookUseStateObject/>
                 </div>
             </div>
         </div>
@@ -43,7 +44,8 @@ const HookUseStateSwitcher = () => {
 
     return (
         <div style={{paddingBottom: "10px", backgroundColor: color}}>
-            <p style={{margin: "0px", marginBottom: "10px", fontSize: `${fontSize}px`, color: colorText}}>Testing useState</p>
+            <p style={{margin: "0px", marginBottom: "10px", fontSize: `${fontSize}px`, color: colorText}}>Testing
+                useState</p>
             <button onClick={() => {
                 setColor("black");
                 setColorText("white");
@@ -160,20 +162,13 @@ const HookCounter = (props) => {
         return () => console.log("clear");
     }, [value])
 
-    return  <div>Hook value: {value}</div>
+    return <div>Hook value: {value}</div>
 }
 
-const HookUseEffectDataLoading = () => {
+const PlanetInfo = () => {
     const [id, setId] = useState(1);
-    const [name, setName] = useState(null);
 
-    useEffect(() => {
-        let cancelled = false;
-        fetch(`https://swapi.dev/api/planets/${id}/`)
-            .then(res => res.json())
-            .then(data => !cancelled && setName(data.name));
-        return () =>  cancelled = true;
-    }, [id]);
+    const name = usePlanetInfo(id);
 
     return (
         <div>
@@ -181,7 +176,8 @@ const HookUseEffectDataLoading = () => {
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <img style={{height: "190px", marginRight: "10px"}} src={UseEffectDataLeadingImg} alt=""/>
                 <div>
-                    {id > 0 ? (<p style={{width: "200px"}}>{id} - {name}</p>) : (<p style={{width: "200px"}}>{id} - dont planet</p>)}
+                    {id > 0 ? (<p style={{width: "200px"}}>{id} - {name}</p>) : (
+                        <p style={{width: "200px"}}>{id} - dont planet</p>)}
 
                     <button onClick={() => {
                         setId(v => v + 1)
@@ -193,13 +189,15 @@ const HookUseEffectDataLoading = () => {
                     </button>
                 </div>
             </div>
+            <h2 style={{textAlign: "center"}}>Creating Hooks</h2>
+            <img style={{height: "190px", marginRight: "10px"}} src={HookCreatingImg} alt=""/>
         </div>
     );
 }
 
 const Notification = () => {
     const [hide, setHide] = useState(true);
-    const [visible , setVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         const hideTimeout = setTimeout(() => setHide(false), 3000);
@@ -216,6 +214,20 @@ const Notification = () => {
             {visible && <p>Hello visible useEffect</p>}
         </div>
     );
+}
+
+const usePlanetInfo = (id) => {
+    const [name, setName] = useState(null);
+
+    useEffect(() => {
+        let cancelled = false;
+        fetch(`https://swapi.dev/api/planets/${id}/`)
+            .then(res => res.json())
+            .then(data => !cancelled && setName(data.name));
+        return () => cancelled = true;
+    }, [id]);
+
+    return name;
 }
 
 
