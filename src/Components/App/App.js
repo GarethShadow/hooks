@@ -76,7 +76,7 @@ const HookUseStateObject = () => {
             </div>
             <div>
                 <div>{person.firstName} {person.lastName}</div>
-                <button onClick={changePerson}>Change name</button>
+                <button onClick={changePerson}>Change first name</button>
             </div>
 
         </div>
