@@ -6,7 +6,7 @@ const UseStateItem = () => {
     return (
         <div>
             <h2 style={{textAlign: "center"}}>useState</h2>
-            <div style={{display: "flex", justifyContent: "center"}}>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
                 <img style={{height: "190px", marginRight: "10px"}} src={UseStateImage} alt=""/>
                 <div>
                     <HookSwitcher />

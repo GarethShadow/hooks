@@ -6,16 +6,18 @@ const HookSwitcher = () => {
     const [fontSize, setFontSize] = useState(14);
 
     return (
-        <div style={{padding: "10px", backgroundColor: color}}>
-            <p style={{fontSize: `${fontSize}px`, color: colorText}}>Test text</p>
+        <div style={{paddingBottom: "10px", backgroundColor: color}}>
+            <p style={{margin: "0px", marginBottom: "10px", fontSize: `${fontSize}px`, color: colorText}}>Test text</p>
             <button onClick={() => {
                 setColor("black");
                 setColorText("white");
-            }}>Dark</button>
+            }}>Dark
+            </button>
             <button onClick={() => {
                 setColor("white");
                 setColorText("black")
-            }}>Light</button>
+            }}>Light
+            </button>
             <button onClick={() => setFontSize((size) => size + 2)}>+</button>
             <button onClick={() => setFontSize((size) => size - 2)}>-</button>
         </div>

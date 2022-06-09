@@ -6,7 +6,7 @@ const UseContextItem = ({MyContext}) => {
     return (
         <div>
             <h2 style={{textAlign: "center"}}>useContext</h2>
-            <div style={{display: "flex", justifyContent: "center"}}>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
                 <img style={{height: "190px", marginRight: "10px"}} src={UseContexImage} alt=""/>
                 <div>
                     {value}
