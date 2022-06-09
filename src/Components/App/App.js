@@ -1,11 +1,16 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import UseStateImg from "../../images/96_useState.png";
+import USseContextImg from "../../images/97_useContext.png";
 
 
 const App = () => {
+    const MyContext = React.createContext();
     return (
         <div style={{width: "550px", margin: "0 auto"}}>
             <HookUseState/>
+            <MyContext.Provider value="Hello context hook">
+                <HookUseContext MyContext={MyContext} />
+            </MyContext.Provider>
         </div>
     );
 }
@@ -79,6 +84,21 @@ const HookUseStateObject = () => {
                 <button onClick={changePerson}>Change first name</button>
             </div>
 
+        </div>
+    );
+};
+
+const HookUseContext = ({MyContext}) => {
+    const value = useContext(MyContext)
+    return (
+        <div>
+            <h2 style={{textAlign: "center"}}>useContext</h2>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+                <img style={{height: "190px", marginRight: "10px"}} src={USseContextImg} alt=""/>
+                <div>
+                    {value}
+                </div>
+            </div>
         </div>
     );
 };
