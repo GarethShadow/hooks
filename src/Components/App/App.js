@@ -7,7 +7,7 @@ const App = () => {
     const [visible, setVisible] = useState(true);
 
     return (
-        <div style={{width: "550px", margin: "0 auto"}}>
+        <div style={{width: "560px", margin: "0 auto"}}>
             <div>
                 <h2 style={{textAlign: "center"}}>useEffect</h2>
                 <div style={{display: "flex", justifyContent: "space-between"}}>
